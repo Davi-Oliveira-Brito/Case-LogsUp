@@ -9,12 +9,12 @@ CREATE TABLE tb_admin (
     senha_admin	VARCHAR(50)  NOT NULL
 );
 
-CREATE TABLE tb_user (
-	id_user			INT AUTO_INCREMENT PRIMARY KEY,
-    nome_user		VARCHAR(100) NOT NULL,
-    email_user		VARCHAR(100) NOT NULL,
-    senha_user		VARCHAR(50)  NOT NULL,
-    permissao_user	INT
+CREATE TABLE tb_usuario (
+	id_usuario			INT AUTO_INCREMENT PRIMARY KEY,
+    nome_usuario		VARCHAR(100) NOT NULL,
+    email_usuario		VARCHAR(100) NOT NULL,
+    senha_usuario		VARCHAR(50)  NOT NULL,
+    permissao_usuario	INT
 );
 
 CREATE TABLE tb_produto (
@@ -25,7 +25,7 @@ CREATE TABLE tb_produto (
     quantidade_produto		INT NOT NULL,
     datacriacao_produto		DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_usuario				INT NOT NULL,
-    FOREIGN KEY(id_usuario) REFERENCES tb_user(id_user)
+    FOREIGN KEY(id_usuario) REFERENCES tb_usuario(id_usuario)
 );
 
 
