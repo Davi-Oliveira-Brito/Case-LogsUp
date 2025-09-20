@@ -1,4 +1,4 @@
-import { con } from './connection.js';
+import { con } from '../connection.js';
 
 // Query Para Inserir Produto
 export async function AddProduto(produto, usuario) {
@@ -24,36 +24,27 @@ export async function EditarProduto(produto, usuario) {
     return resposta
 }
 
-export async function ExcluirProduto(id, usuario) {
+export async function ExcluirProduto(id) {
     const comando = `
     DELETE FROM tb_produto
     WHERE id_produto = ?;
     `
 
-    const [resposta] = await con.query(comando, [id, usuario.id]);
+    const [resposta] = await con.query(comando, [id]);
     return resposta
 }
 
-export async function BuscarUsuario(id) {
+export async function MostrarProdutos() {
     const comando = `
-    SELECT * FROM tb_usuario
-    WHERE id_usuario = ?;
-    `;
-    const [resposta] = await con.query(comando, [id]);
-    return resposta;
-}
-
-export async function MostrarProdutos(id) {
-    const comando = `
-    SELECT 	id_produto			AS Id,
-		    nome_produto		AS Nome,
-		    descricao_produto	AS Descrição,
-		    preco_produto		AS Preço,
-		    quantidade_produto	AS Quantidade,
-		    datacriacao_produto AS 'Data de Criação'
+    SELECT 	id_produto			AS id,
+		    nome_produto		AS nome,
+		    descricao_produto	AS descricao,
+		    preco_produto		AS preco,
+		    quantidade_produto	AS quantidade,
+		    datacriacao_produto AS datacriacao
     FROM tb_produto;
     `
 
-    const [resposta] = await con.query(comando, [id])
+    const [resposta] = await con.query(comando, [])
     return resposta
 }

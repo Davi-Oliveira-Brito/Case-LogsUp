@@ -1,14 +1,16 @@
-import { AddProduto, EditarProduto, ExcluirProduto, BuscarUsuario, MostrarProdutos } from '../repository/ProdutoRepository.js'
-
 import { Router } from 'express';
+import { AddProduto, EditarProduto, ExcluirProduto, MostrarProdutos } from '../../repository/User/ProdutoRepository.js'
+import { decodeToken } from '../auth.js';
+
 const server = Router();
 
-server.post('/usuario/produto/cadastrar', async (req, resp) => {
+server.post('/adicionar', async (req, resp) => {
     try {
-        console.log("asa")
-        const { produto, usuario } = req.body;
-        const usuarioDb = await BuscarUsuario(usuario.id)
-        if (usuarioDb.length === 0 && (usuario.permissao == 0 || usuario.permissao == 1)) {
+        const jwt = req.headers['user-access-token']
+        const usuario = decodeToken(jwt);
+        
+        const { produto } = req.body;
+        if (usuario.permissao == 0 || usuario.permissao == 1) {
 
             if (typeof (produto.nome) !== 'string' || !produto.nome || produto.nome.length <= 2 || produto.nome.length > 100)
                 throw new Error('Digite um nome valido');
@@ -34,11 +36,13 @@ server.post('/usuario/produto/cadastrar', async (req, resp) => {
     }
 });
 
-server.put('/usuario/produto/editar', async (req, resp) => {
+server.put('/editar', async (req, resp) => {
     try {
-        const { produto, usuario } = req.body;
-        const usuarioDb = await BuscarUsuario(usuario.id)
-        if (usuarioDb.length === 0 || usuario.id > 0 && usuario.permissao == 1) {
+        const jwt = req.headers['user-access-token']
+        const usuario = decodeToken(jwt);
+        const { produto } = req.body;
+
+        if (usuario.permissao == 1) {
             if (typeof (produto.nome) !== 'string' || !produto.nome || produto.nome.length <= 2 || produto.nome.length > 100)
                 throw new Error('Digite um nome valido');
 
@@ -61,19 +65,19 @@ server.put('/usuario/produto/editar', async (req, resp) => {
     }
 });
 
-server.delete('/usuario/produto/:id/deletar', async (req, resp) => {
+server.delete('/:id/deletar', async (req, resp) => {
     try {
-        console.log('tst')
+        const jwt = req.headers['user-access-token']
+        const usuario = decodeToken(jwt);
         const { id } = req.params;        
-        const { usuario } = req.body;    
-        const usuarioDb = await BuscarUsuario(usuario.id)
-        if (usuarioDb.length === 0 || !usuario || !usuario.id || usuario.permissao !== 1) {
+        
+        if (usuario.permissao !== 1) {
             return resp.status(403).send({ 
                 erro: "Usuário não encontrado ou não tem permissão" 
             });
         }
 
-        const resultado = await ExcluirProduto(id, usuario);
+        const resultado = await ExcluirProduto(id);
 
         if (resultado.affectedRows === 0) {
             return resp.status(404).send({
@@ -89,11 +93,19 @@ server.delete('/usuario/produto/:id/deletar', async (req, resp) => {
     }
 });
 
-server.get('/usuario/produtos', async (req, resp) =>{
+server.get('/visualizar', async (req, resp) =>{
     try{
-        const id = req.body
-        const resposta = await MostrarProdutos();
-        resp.status(200).send(resposta)
+        const jwt = req.headers['user-access-token']
+        const usuario = decodeToken(jwt);
+        
+        if(usuario){
+
+            const resposta = await MostrarProdutos();
+            resp.status(200).send(resposta)
+        } else{
+            resp.status(401)
+        }
+        
     } catch (error){
         resp.status(404).send({
             error:error.message

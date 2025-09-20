@@ -1,4 +1,4 @@
-import { con } from './connection.js';
+import { con } from '../connection.js';
 
 export async function login(admin) {
     const comando = `
@@ -19,6 +19,20 @@ export async function permissaoUsuario(usuario) {
         SET permissao_usuario = ?
         WHERE id_usuario = ?;
     `
+
     const [resposta] = await con.query(comando, [usuario.permissao, usuario.id]);
+    return resposta
+}
+
+export async function listarUsuarios(){
+    const comando = `
+        SELECT id_usuario		 AS id,			
+		       nome_usuario		 AS nome,  		
+               email_usuario 	 AS email, 		
+               permissao_usuario AS permissao
+        FROM tb_usuario
+    `
+    
+    const [resposta] = await con.query(comando, [])
     return resposta
 }

@@ -1,9 +1,10 @@
-import { login, permissaoUsuario } from "../repository/AdminRepository.js";
-
 import { Router } from 'express';
+import { listarUsuarios, login, permissaoUsuario } from "../../repository/Admin/AdminRepository.js";
+import { AdminPermission, generateToken, decodeToken } from '../auth.js';
+
 const server = Router();
 
-server.post('/admin/login', async (req, resp) => {
+server.post('/login', async (req, resp) => {
     try {
         const admin = req.body;
         const resposta = await login(admin);
@@ -14,7 +15,8 @@ server.post('/admin/login', async (req, resp) => {
         if (!resposta)
             throw new Error('Credenciais inválidas ou Usuario sem permissão');
 
-        resp.send(resposta)
+        const jwt = generateToken(resposta);
+        resp.send({jwt})
 
     } catch (error) {
         resp.status(404).send({
@@ -23,8 +25,7 @@ server.post('/admin/login', async (req, resp) => {
     }
 })
 
-
-server.put('/admin/:id/permissao', async (req, resp) => {
+server.put('/:id/permissao', AdminPermission , async (req, resp) => {
     try {
         const { id } = req.params;
         const { permissao } = req.body;
@@ -47,6 +48,24 @@ server.put('/admin/:id/permissao', async (req, resp) => {
     }
 });
 
+server.get('/listar/usuarios', AdminPermission, async (req, resp) =>{
+    try{
+            const jwt = req.headers['adm-access-token']
+            const usuario = decodeToken(jwt);
+            if(usuario){
+                const resposta = await listarUsuarios();
+    
+                resp.status(200).send(resposta)
+            } else{
+                resp.status(401)
+            }
+            
+        } catch (error){
+            resp.status(404).send({
+                error:error.message
+            })
+        }
+})
 
 
 export default server;

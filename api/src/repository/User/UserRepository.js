@@ -1,4 +1,4 @@
-import { con } from './connection.js';
+import { con } from '../connection.js';
 
 
 export async function logon(usuario) {
@@ -12,16 +12,16 @@ export async function logon(usuario) {
 
 }
 
-
 export async function login(usuario) {
     const comando = `
-        SELECT 	id_usuario	        AS Id,			
-        	    nome_usuario		AS Nome,  		
-                email_usuario 		AS Email, 		
-                permissao_usuario	AS Permissão
+        SELECT 	id_usuario	        AS id,			
+        	    nome_usuario		AS nome,  		
+                email_usuario 		AS email, 		
+                permissao_usuario	AS permissao
         FROM tb_usuario
         WHERE email_usuario = ? AND senha_usuario = ? AND permissao_usuario IS NOT NULL AND permissao_usuario < 2;
     `
+
     const [resposta] = await con.query(comando, [usuario.email, usuario.senha]);
     return resposta[0]; 
 }

@@ -1,11 +1,13 @@
-import { login, logon } from '../repository/UserRepository.js'
-
 import { Router } from 'express'; 
+import { login, logon } from '../../repository/User/UserRepository.js'
+import { generateToken } from '../auth.js';
+
 const server = Router();
 
-server.post('/user/logon', async (req, resp) => {
+server.post('/logon', async (req, resp) => {
     try {
         const usuario = req.body;
+
         if(typeof(usuario.nome)  !== 'string' || !usuario.nome || usuario.nome.length <= 2 || usuario.nome.length > 100) 
             throw new Error('Digite um nome valido');
 
@@ -23,12 +25,9 @@ server.post('/user/logon', async (req, resp) => {
             x: error.message
         });
     }
-
 })
 
-
-
-server.post('/user/login', async (req, resp) => {
+server.post('/login', async (req, resp) => {
     try {
         const usuario = req.body;
         const resposta = await login(usuario);
@@ -39,7 +38,8 @@ server.post('/user/login', async (req, resp) => {
         if (!resposta) 
             throw new Error('Credenciais inválidas ou Usuario sem permissão');
         
-        resp.send(resposta)
+        const jwt = generateToken(resposta);
+        resp.send({jwt})
 
     } catch (error) {
         resp.status(404).send({
