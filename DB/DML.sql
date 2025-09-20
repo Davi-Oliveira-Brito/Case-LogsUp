@@ -6,27 +6,34 @@ SELECT * FROM tb_produto;
 
 	-- Logon
 INSERT INTO tb_admin(nome_admin, email_admin, senha_admin)
-			   value('','','');
+			   value('Admin','admin@admin','0000');
                
+    -- login           
+SELECT	nome_admin	AS Nome,
+		email_admin	AS Email,
+        senha_admin	AS Senha
+FROM tb_admin
+WHERE email_admin = '' AND senha_admin = '';
+
 	-- Fornecimento de Permissão ao User:
 UPDATE tb_usuario
-SET permissao_usuario = 10
-WHERE id_usuario = 1;
+SET permissao_usuario = 0
+WHERE id_usuario = 0;
 
 
 -- USER:
 
 	-- Logon
-INSERT INTO tb_user(nome_usuario, email_usuario, senha_usuario)
-			  value('Davi','d@gmail.com','1234');
+INSERT INTO tb_usuario(nome_usuario, email_usuario, senha_usuario)
+			  value('','','');
               
      -- Login         
-SELECT 	id_usuarior			AS Id,			
+SELECT 	id_usuario			AS Id,			
 		nome_usuario		AS Nome,  		
         email_usuario 		AS Email, 		
-        permissa_usuario	AS Permissão
-FROM tb_user
-WHERE email_user = 'pholiveirabrito@hotmail.com' AND senha_user = 'Pedro2000' AND permissao_user IS NOT NULL AND permissao_user < 2;
+        permissao_usuario	AS Permissão
+FROM tb_usuario
+WHERE email_usuario = '' AND senha_usuario = '' AND permissao_usuario IS NOT NULL AND permissao_usuario < 2;
 
 	-- Inserção de Produto 
 INSERT INTO tb_produto (nome_produto, descricao_produto, preco_produto, quantidade_produto, id_usuario)
