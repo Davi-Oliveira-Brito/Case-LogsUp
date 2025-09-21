@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
-import {UserLogin} from '../../../api/userApi.js'
+import { UserLogin } from '../../../api/userApi.js'
+import { toast } from 'react-toastify';
 
 import storage from 'local-storage'
 import LoadingBar from 'react-top-loading-bar'
@@ -16,18 +17,25 @@ export default function LoginUser() {
     const navigate = useNavigate();
     const ref = useRef()
 
+    useEffect(() => {
+        if (storage('user-access-token'))
+            navigate('/user/produtos')
+    }, [])
+
+
+
     async function entrarClick() {
         setCarregando(true);
         ref.current.continuousStart();
         try {
             const r = await UserLogin(email, senha);
-            
             storage('user-access-token', r)
             setTimeout(() => {
                 navigate('/user/produtos')
             }, 3000)
-
+            
         } catch (error) {
+            toast.error(error.response.data.r)
             ref.current.complete();
             setCarregando(false)
             if (error.response.status === 401)
@@ -50,11 +58,11 @@ export default function LoginUser() {
                         <p className="LoginTittle">Usuário</p>
                         <div className="LoginText">
                             <label>Email</label>
-                            <input type="Email" placeholder="Informe seu Email" value={email} onChange={e => setEmail(e.target.value)} />
+                            <input type="Email" value={email} onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className="LoginText">
                             <label>Senha</label>
-                            <input type="Password" placeholder="Informe sua Senha" value={senha} onChange={e => setSenha(e.target.value)} />
+                            <input type="Password" value={senha} onChange={e => setSenha(e.target.value)} />
 
                         </div>
                     </div>

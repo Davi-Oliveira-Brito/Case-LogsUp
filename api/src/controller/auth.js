@@ -33,11 +33,11 @@ export function UserPermission(req, resp, next){
 export function AdminPermission(req, resp, next){
     try {
         // verificar se o token foi passado no cabeçalho
-        let token = req.headers['adm-access-token']; 
+        let token = req.headers['admin-access-token']; 
 
         // verificar se o token foi passado como parametro de query
         if(token === undefined)
-            token = req.query['adm-access-token']; 
+            token = req.query['admin-access-token']; 
 
         //verificar o token, se ele é válido para a KEY
         let signed = jwt.verify(token, KEY);

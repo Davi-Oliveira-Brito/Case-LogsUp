@@ -1,0 +1,41 @@
+.UserCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 400px;
+    height: 100px;
+    padding: 10px;
+    border: solid #82A643;
+    border-radius: 15px;
+    padding: 1em;
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+        .nome {
+            font-size: 20px;
+            font-weight: 700;
+            color: #82A643;
+        }
+
+        .email,
+        .permissao {
+            font-size: 16px;
+            color: #0D4D69;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        height: 100%;
+    }
+
+
+
+}

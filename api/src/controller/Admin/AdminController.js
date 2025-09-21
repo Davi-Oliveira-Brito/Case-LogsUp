@@ -20,7 +20,7 @@ server.post('/login', async (req, resp) => {
 
     } catch (error) {
         resp.status(404).send({
-            err: error.message
+            r: error.message
         });
     }
 })
@@ -50,7 +50,7 @@ server.put('/:id/permissao', AdminPermission , async (req, resp) => {
 
 server.get('/listar/usuarios', AdminPermission, async (req, resp) =>{
     try{
-            const jwt = req.headers['adm-access-token']
+            const jwt = req.headers['admin-access-token']
             const usuario = decodeToken(jwt);
             if(usuario){
                 const resposta = await listarUsuarios();

@@ -56,6 +56,7 @@ server.put('/editar', async (req, resp) => {
                 throw new Error('Digite uma quantidade valida!');
 
             const result = await EditarProduto(produto, usuario);
+            console.log(result)
             resp.send({ mensagem: "Produto editado com êxito!" });
         } else
             return resp.status(404).send({ erro: "Usuário não encontrado ou não tem Permissão" });
@@ -88,7 +89,6 @@ server.delete('/:id/deletar', async (req, resp) => {
         resp.send({ mensagem: "Produto excluído com sucesso!" });
 
     } catch (error) {
-        console.error(error);
         resp.status(500).send({ erro: "Erro ao excluir produto" });
     }
 });

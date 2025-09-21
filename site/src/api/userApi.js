@@ -10,3 +10,12 @@ export async function UserLogin(email, senha) {
     })
     return r.data;
 }
+
+export async function UserLogon(nome, email, senha){
+    const r = await api.post('/user/logon',{
+        nome:nome,
+        email:email,
+        senha:senha
+    })
+    return r.data
+}

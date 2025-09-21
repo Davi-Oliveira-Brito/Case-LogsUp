@@ -20,7 +20,7 @@ export default function Home() {
                         
                         <Button
                             onClick={() => navigate('/admin/login')} Text="Administrador" width="100%" padding= "15px 0px" />
-                        <label>Não tem uma conta? <a  onClick={() => navigate('/user/logon')}>Criar Conta</a></label>
+                        <label>Não tem uma conta? <span  onClick={() => navigate('/user/logon')}>Criar Conta</span></label>
                     </div>
 
                 </div>

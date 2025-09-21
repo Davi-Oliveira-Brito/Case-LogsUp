@@ -1,13 +1,13 @@
 import './index.scss'
 
-export default function ProdutoCard({nome, desc, qtd, preco, data}){
+export default function ProdutoCard({nome, desc, qtd, preco, data, editClick, deleteClick}){
     return(
         <div className='ProdutoCard'>
             <div className='Produto-l1'>
                 <p className='nome'>{nome}</p>
                 <div className='icons'>
-                    <img src="/assets/icons/pencil.svg" alt="" />
-                    <img src="/assets/icons/delete.svg" alt="" />
+                    <img onClick={editClick} src="/assets/icons/pencil.svg" alt="" />
+                    <img onClick={deleteClick} src="/assets/icons/delete.svg" alt="" />
                     
                 </div>
             </div>

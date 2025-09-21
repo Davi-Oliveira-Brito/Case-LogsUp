@@ -1,0 +1,48 @@
+.UserPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+
+    .pg-m {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        height: 100vh;
+        width: 80%;
+
+        .bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1em;
+
+            height: 90%;
+
+            .tittle {
+                width: 100%;
+
+                .t {
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #0D4D69;
+                }
+            }
+
+            .usuarios {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: wrap;
+
+                padding: 2em 0em;
+                gap: 3em;
+            }
+        }
+    }
+
+}
