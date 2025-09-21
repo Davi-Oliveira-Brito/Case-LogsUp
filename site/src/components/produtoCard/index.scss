@@ -1,0 +1,73 @@
+.ProdutoCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 450px;
+    height: 200px;
+    padding: 10px;
+    border: solid #0D4D69;
+    border-radius: 15px;
+
+    .Produto-l1 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .nome {
+            font-weight: 700;
+            font-size: 16px;
+            color: #82A643;
+        }
+
+        .icons {
+            width: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    .Produto-l2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        height: 40%;
+
+        .desc {
+            font-size: 12px;
+            color: #0D4D69;
+        }
+
+        .text {
+            font-size: 12px;
+            color: #0D4D69;
+
+            span {
+                font-weight: 700;
+            }
+        }
+
+    }
+
+    .Produto-l3{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .text {
+            font-size: 12px;
+            color: #0D4D69;
+
+            span {
+                font-weight: 700;
+            }
+        }
+    }
+
+
+
+}

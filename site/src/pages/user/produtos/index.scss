@@ -1,0 +1,59 @@
+.ProdutosPage{
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .pg-m{
+        padding: 1em 0em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1em;
+        
+        width: 80dvw;
+
+        .top{
+            width: 100%;
+
+            img{
+                width: 200px;
+            }
+
+        }
+
+        .bottom{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .pg-t{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                align-items: center;
+                width: 100%;
+
+                .tittle{
+                    color: #0D4D69;
+                    font-size: 24px;
+
+                }
+
+            }
+        
+            .Produtos{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                padding: 2em 0em;
+                gap: 3em;
+                
+            }
+        }
+
+    }
+}

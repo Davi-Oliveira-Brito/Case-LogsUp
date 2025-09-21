@@ -1,0 +1,78 @@
+.LogonPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100dvh;
+    width: 100dvw;
+
+    background-color: #0E4C68;
+    .LogonArea {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
+        height: 70dvh;
+        width: 40dvw;
+        padding: 4em 0em;
+
+        background-color: #FFFFFF;
+        border-radius: 15px;
+        .LogonLogo {
+            width: 40%;
+            
+            img {
+                width: 100%;
+            }
+        }
+        
+        .Logon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 65%;
+            width: 60%;
+
+            .LogonForm {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                height: 70%;
+                width: 100%;
+
+                .LogonTittle {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #0E4C68;
+                }
+
+                .LogonText {
+                    display: flex;
+                    flex-direction: column;
+                    label {
+                        color: #0E4C68;
+                        
+                        margin-left: 10px;
+                    }
+                    
+                    input {
+                        color: #0E4C68;
+                        border: solid 1px #0E4C68;
+                        border-radius: 15px;
+                        box-sizing: border-box;
+                        
+                        width: 100%;
+                        padding: 12px;
+                        font-size: 14px;
+                    }
+
+                    input:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}
