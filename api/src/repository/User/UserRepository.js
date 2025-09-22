@@ -25,3 +25,14 @@ export async function login(usuario) {
     const [resposta] = await con.query(comando, [usuario.email, usuario.senha]);
     return resposta[0]; 
 }
+
+export async function buscaUsuario(usuario) {
+    const comando = `
+        SELECT 	id_usuario	        AS id	
+        FROM tb_usuario
+        WHERE email_usuario = ?;
+    `
+
+    const [resposta] = await con.query(comando, [usuario.email]);
+    return resposta[0]; 
+}

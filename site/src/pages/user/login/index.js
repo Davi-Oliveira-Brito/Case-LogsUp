@@ -15,6 +15,9 @@ export default function LoginUser() {
     const [carregando, setCarregando] = useState(false)
 
     const navigate = useNavigate();
+    const goHome = () => {
+        navigate('/');
+    };
     const ref = useRef()
 
     useEffect(() => {
@@ -33,7 +36,7 @@ export default function LoginUser() {
             setTimeout(() => {
                 navigate('/user/produtos')
             }, 3000)
-            
+
         } catch (error) {
             toast.error(error.response.data.r)
             ref.current.complete();
@@ -51,7 +54,7 @@ export default function LoginUser() {
 
             <section className="LoginArea">
                 <div className="LoginLogo">
-                    <img src="/assets/images/LogsUp.png" alt="" />
+                    <img onClick={goHome} src="/assets/images/LogsUp.png" alt="" />
                 </div>
                 <div className="Login">
                     <div className="LoginForm">

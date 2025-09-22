@@ -14,7 +14,7 @@ SELECT	nome_admin	AS nome,
 		email_admin	AS email,
         senha_admin	AS senha
 FROM tb_admin
-WHERE email_admin = '' AND senha_admin = '';
+WHERE email_admin = 'admin@admin' AND senha_admin = '0000';
 
 	-- Fornecimento de Permissão ao User:
 UPDATE tb_usuario

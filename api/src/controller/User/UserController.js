@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { login, logon } from '../../repository/User/UserRepository.js'
+import { login, logon,buscaUsuario } from '../../repository/User/UserRepository.js'
 import { generateToken } from '../auth.js';
 
 const server = Router();
@@ -19,7 +19,10 @@ server.post('/logon', async (req, resp) => {
 
         if (!usuario.senha)
             throw new Error('Digite uma senha valida!');
-
+        const usuarioExiste = await buscaUsuario(usuario);
+        if(usuarioExiste)
+            throw new Error('Email ja Existente');
+        
         const insertedId = await logon(usuario);
         resp.send(insertedId);
 

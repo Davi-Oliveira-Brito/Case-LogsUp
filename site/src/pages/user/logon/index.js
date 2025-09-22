@@ -14,6 +14,10 @@ export default function Logon() {
     const [senha, setSenha] = useState('');
     const [senha2, setSenha2] = useState(''); // renomeado de email2 para senha2
 
+    const goHome = () => {
+        navigate('/');
+    };
+
     async function logonClick() {
         // validações simples
         if (!nome.trim()) {
@@ -55,7 +59,7 @@ export default function Logon() {
         <main className="LogonPage">
             <section className="LogonArea">
                 <div className="LogonLogo">
-                    <img src="/assets/images/LogsUp.png" alt="" />
+                    <img onClick={goHome} src="/assets/images/LogsUp.png" alt="" />
                 </div>
                 <div className="Logon">
                     <div className="LogonForm">

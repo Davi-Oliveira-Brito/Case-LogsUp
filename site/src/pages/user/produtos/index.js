@@ -9,7 +9,7 @@ import Button from '../../../components/Button/index.js'
 import Header from '../../../components/header/index.js'
 import ProdutoCard from '../../../components/produtoCard/index.js'
 import ProdutoModal from '../../../components/produtoPopup/index.js'
-import AddProdutoModal from '../../../components/AdcionarProduto/index.js'
+import AddProdutoModal from '../../../components/AdicionarProduto/index.js'
 
 import { ListarProdutos } from '../../../api/produtoApi.js'
 
@@ -77,7 +77,7 @@ export default function Produtos() {
                     <div className='pg-t'>
                         <h2 className='tittle'>Produtos</h2>
 
-                        <Button Text="Adcionar" width="125px" padding="7px 0px" onClick={() => setOpenAdd(true)} />
+                        <Button Text="Adicionar" width="125px" padding="7px 0px" onClick={() => setOpenAdd(true)} />
                     </div>
                     <div className='Produtos'>
                         {produtos.map((item, index) =>

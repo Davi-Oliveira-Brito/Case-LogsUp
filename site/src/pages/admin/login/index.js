@@ -14,40 +14,43 @@ export default function LoginAdmin() {
     const [senha, setSenha] = useState('');
     const [carregando, setCarregando] = useState(false)
 
-        const navigate = useNavigate();
-        const ref = useRef()
-    
-        useEffect(() => {
-            if (storage('admin-access-token')){
-                navigate('/Admin/area') 
-            }
-        }, [])
+    const navigate = useNavigate();
+    const goHome = () => {
+        navigate('/');
+    };
+    const ref = useRef()
 
-         async function entrarClick() {
-                setCarregando(true);
-                ref.current.continuousStart();
-                try {
-                    const r = await AdminLogin(email, senha);
-                    storage('admin-access-token', r)
-                    setTimeout(() => {
-                        navigate('/Admin/area')
-                    }, 3000)
-                    
-                } catch (error) {
-                    toast.error(error.response.data.r)
-                    ref.current.complete();
-                    setCarregando(false)
-                    if (error.response.status === 401)
-                        console.log(error.response.data.r)
-                }
-            }
+    useEffect(() => {
+        if (storage('admin-access-token')) {
+            navigate('/Admin/area')
+        }
+    }, [])
+
+    async function entrarClick() {
+        setCarregando(true);
+        ref.current.continuousStart();
+        try {
+            const r = await AdminLogin(email, senha);
+            storage('admin-access-token', r)
+            setTimeout(() => {
+                navigate('/Admin/area')
+            }, 3000)
+
+        } catch (error) {
+            toast.error(error.response.data.r)
+            ref.current.complete();
+            setCarregando(false)
+            if (error.response.status === 401)
+                console.log(error.response.data.r)
+        }
+    }
 
     return (
         <main className="LoginPage">
-             <LoadingBar color="#2dade9ff" ref={ref} />
+            <LoadingBar color="#2dade9ff" ref={ref} />
             <section className="LoginArea">
                 <div className="LoginLogo">
-                    <img src="/assets/images/LogsUp.png" alt="" />
+                    <img onClick={goHome} src="/assets/images/LogsUp.png" alt="" />
                 </div>
                 <div className="Login">
                     <div className="LoginForm">
@@ -58,7 +61,7 @@ export default function LoginAdmin() {
                         </div>
                         <div className="LoginText">
                             <label>Senha</label>
-                            <input type="Password" value={senha} onChange={e => setSenha(e.target.value)}/>
+                            <input type="Password" value={senha} onChange={e => setSenha(e.target.value)} />
 
                         </div>
                     </div>
